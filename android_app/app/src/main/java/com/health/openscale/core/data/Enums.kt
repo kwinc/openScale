@@ -110,7 +110,7 @@ enum class SupportedLanguage(val code: String, val nativeDisplayName: String) {
     POLISH("pl", "Polish (język polski)"),
     PORTUGUESE_BRAZIL("pt-BR", "Portuguese (Brazil; Português)"),
     //ROMANIAN("ro", "Romanian (Română)"),
-    //RUSSIAN("ru", "Russian (русский)"),
+    RUSSIAN("ru", "Russian (Русский)"),
     //SLOVAK("sk", "Slovak (Slovenčina)"),
     //SLOVENIAN("sl", "Slovenian (Slovenski Jezik)"),
     //SPANISH("es", "Spanish (Español)"),
@@ -159,8 +159,16 @@ enum class GenderType(@StringRes val displayNameResId: Int) {
     }
 }
 
-enum class ActivityLevel {
-    SEDENTARY, MILD, MODERATE, HEAVY, EXTREME;
+enum class ActivityLevel(@StringRes val displayNameResId: Int) {
+    SEDENTARY(displayNameResId = R.string.user_detail_label_activity_level_sedentary),
+    MILD(displayNameResId = R.string.user_detail_label_activity_level_mild),
+    MODERATE(displayNameResId = R.string.user_detail_label_activity_level_moderate),
+    HEAVY(displayNameResId = R.string.user_detail_label_activity_level_heavy),
+    EXTREME(displayNameResId = R.string.user_detail_label_activity_level_extreme);
+
+    fun getDisplayName(context: android.content.Context): String {
+        return context.getString(displayNameResId)
+    }
 
     fun toInt(): Int {
         when (this) {

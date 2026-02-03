@@ -447,7 +447,7 @@ fun UserDetailScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             OutlinedTextField(
-                value = activityLevel.name.lowercase().replaceFirstChar { it.uppercaseChar().toString() },
+                value = activityLevel.getDisplayName(context = LocalContext.current),
                 onValueChange = {}, // Input is read-only, selection via dropdown
                 readOnly = true,
                 label = { Text(stringResource(id = R.string.user_detail_label_activity_level)) },
@@ -465,7 +465,7 @@ fun UserDetailScreen(
             ) {
                 ActivityLevel.entries.forEach { selectionOption ->
                     DropdownMenuItem(
-                        text = { Text(selectionOption.name.lowercase().replaceFirstChar { it.uppercaseChar().toString() }) },
+                        text = { Text(selectionOption.getDisplayName(context = LocalContext.current) ) },
                         onClick = {
                             activityLevel = selectionOption
                             activityLevelExpanded = false
